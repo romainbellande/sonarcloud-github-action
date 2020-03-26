@@ -9,9 +9,6 @@ runs:
   using: docker
   image: Dockerfile
 inputs:
-  language:
-    description: Set the sonar.language analysis property
-    required: false
   organization:
     description: Set the sonar.organization analysis property
     required: false
@@ -25,3 +22,10 @@ inputs:
   sources:
     description: Set the sonar.sources analysis property
     required: false
+  tests:
+    description: Set the sonar.tests analysis property
+    required: false
+  verbose:
+    description: Set the sonar.verbose analysis property
+    required: false
+    default: 'false'

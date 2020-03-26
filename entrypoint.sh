@@ -39,8 +39,11 @@ fi
 if [[ "${INPUT_SOURCES}" ]]; then
   ARGS="${ARGS} -Dsonar.sources=${INPUT_SOURCES}"
 fi
-if [[ "${INPUT_LANGUAGE}" ]]; then
-  ARGS="${ARGS} -Dsonar.language=${INPUT_LANGUAGE}"
+if [[ "${INPUT_TESTS}" ]]; then
+  ARGS="${ARGS} -Dsonar.tests=${INPUT_TESTS}"
+fi
+if [[ "${INPUT_VERBOSE}" != "false" && "${INPUT_VERBOSE}" != "False" ]]; then
+  ARGS="${ARGS} -Dsonar.verbose=true"
 fi
 
 sonar-scanner -Dsonar.projectBaseDir=${INPUT_PROJECTBASEDIR} -Dsonar.host.url=${SONARCLOUD_URL} ${ARGS}
