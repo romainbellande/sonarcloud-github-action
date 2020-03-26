@@ -17,10 +17,29 @@ if [[ -f "build.gradle" ]]; then
   exit 1
 fi
 
+if [[ "${GITHUB_EVENT_NAME}" == "pull_request" ]]; then
+  EVENT_ACTION=$(jq -r ".action" "${GITHUB_EVENT_PATH}")
+  if [[ "${EVENT_ACTION}" != "opened" ]]; then
+      echo "No need to run analysis. It is already triggered by the push event."
+      exit 78
+  fi
+fi
+
 if [[ -z "${SONARCLOUD_URL}" ]]; then
   SONARCLOUD_URL="https://sonarcloud.io"
 fi
 
-sonar-scanner -Dsonar.projectBaseDir=${INPUT_PROJECTBASEDIR} -Dsonar.host.url=${SONARCLOUD_URL}
+if [[ "${INPUT_ORGANIZATION}" ]]; then
+  ARGS="${ARGS} -Dsonar.organization=${INPUT_ORGANIZATION}"
+fi
+if [[ "${INPUT_PROJECTKEY}" ]]; then
+  ARGS="${ARGS} -Dsonar.projectKey=${INPUT_PROJECTKEY}"
+fi
+if [[ "${INPUT_SOURCES}" ]]; then
+  ARGS="${ARGS} -Dsonar.sources=${INPUT_SOURCES}"
+fi
+if [[ "${INPUT_LANGUAGE}" ]]; then
+  ARGS="${ARGS} -Dsonar.language=${INPUT_LANGUAGE}"
+fi
 
-
+sonar-scanner -Dsonar.projectBaseDir=${INPUT_PROJECTBASEDIR} -Dsonar.host.url=${SONARCLOUD_URL} ${ARGS}
