@@ -29,6 +29,7 @@ if [[ -z "${SONARCLOUD_URL}" ]]; then
   SONARCLOUD_URL="https://sonarcloud.io"
 fi
 
+ARGS="${INPUT_ARGS}"
 if [[ "${INPUT_ORGANIZATION}" ]]; then
   ARGS="${ARGS} -Dsonar.organization=${INPUT_ORGANIZATION}"
 fi

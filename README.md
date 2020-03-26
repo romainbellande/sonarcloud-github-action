@@ -69,6 +69,19 @@ like this:
     sources: lib/
 ```
 
+In case you need to add additional options to the scanner, you can use the `args` option:
+
+```yaml
+- name: Analyze with SonarCloud
+  uses: sonarsource/sonarcloud-github-action@master
+  with:
+    organization: my-organization
+    projectKey: my-projectkey
+    args: >
+      -Dsonar.python.coverage.reportPaths=coverage.xml
+      -Dsonar.test.exclusions=tests/**
+```
+
 ### Secrets
 
 - `SONAR_TOKEN` – **Required** this is the token used to authenticate access to SonarCloud. You can generate a token on your [Security page in SonarCloud](https://sonarcloud.io/account/security/). You can set the `SONAR_TOKEN` environment variable in the "Secrets" settings page of your repository.
