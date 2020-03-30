@@ -9,6 +9,9 @@ runs:
   using: docker
   image: Dockerfile
 inputs:
+  args:
+    description: Additional arguments to the sonarcloud scanner
+    required: false
   organization:
     description: Set the sonar.organization analysis property
     required: false
