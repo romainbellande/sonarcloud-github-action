@@ -21,21 +21,21 @@ if [[ -z "${SONARCLOUD_URL}" ]]; then
   SONARCLOUD_URL="https://sonarcloud.io"
 fi
 
-ARGS="${INPUT_ARGS}"
+ARGUMENTS="${INPUT_OPTIONS}"
 if [[ "${INPUT_ORGANIZATION}" ]]; then
-  ARGS="${ARGS} -Dsonar.organization=${INPUT_ORGANIZATION}"
+  ARGUMENTS="${ARGUMENTS} -Dsonar.organization=${INPUT_ORGANIZATION}"
 fi
 if [[ "${INPUT_PROJECTKEY}" ]]; then
-  ARGS="${ARGS} -Dsonar.projectKey=${INPUT_PROJECTKEY}"
+  ARGUMENTS="${ARGUMENTS} -Dsonar.projectKey=${INPUT_PROJECTKEY}"
 fi
 if [[ "${INPUT_SOURCES}" ]]; then
-  ARGS="${ARGS} -Dsonar.sources=${INPUT_SOURCES}"
+  ARGUMENTS="${ARGUMENTS} -Dsonar.sources=${INPUT_SOURCES}"
 fi
 if [[ "${INPUT_TESTS}" ]]; then
-  ARGS="${ARGS} -Dsonar.tests=${INPUT_TESTS}"
+  ARGUMENTS="${ARGUMENTS} -Dsonar.tests=${INPUT_TESTS}"
 fi
 if [[ "${INPUT_VERBOSE}" != "false" && "${INPUT_VERBOSE}" != "False" ]]; then
-  ARGS="${ARGS} -Dsonar.verbose=true"
+  ARGUMENTS="${ARGUMENTS} -Dsonar.verbose=true"
 fi
 
-sonar-scanner -Dsonar.projectBaseDir=${INPUT_PROJECTBASEDIR} -Dsonar.host.url=${SONARCLOUD_URL} ${ARGS}
+sonar-scanner -Dsonar.projectBaseDir=${INPUT_PROJECTBASEDIR} -Dsonar.host.url=${SONARCLOUD_URL} ${ARGUMENTS}
