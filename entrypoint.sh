@@ -38,6 +38,4 @@ if [[ "${INPUT_VERBOSE}" != "false" && "${INPUT_VERBOSE}" != "False" ]]; then
   ARGUMENTS="${ARGUMENTS} -Dsonar.verbose=true"
 fi
 
-echo "${INPUT_OPTIONS}"
-
 sonar-scanner -Dsonar.projectBaseDir=${INPUT_PROJECTBASEDIR} -Dsonar.host.url=${SONARCLOUD_URL} ${ARGUMENTS}
